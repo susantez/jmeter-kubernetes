@@ -7,6 +7,6 @@ working_dir=`pwd`
 #Get namesapce variable
 tenant=`awk '{print $NF}' $working_dir/tenant_export`
 
-master_pod=`kubectl get po -n $tenant | grep jmeter-master | awk '{print $1}'`
+master_pod=`eks kubectl get po -n $tenant | grep jmeter-master | awk '{print $1}'`
 
-kubectl -n $tenant exec -ti $master_pod bash /jmeter/apache-jmeter-5.0/bin/stoptest.sh
+eks kubectl -n $tenant exec -ti $master_pod bash /jmeter/apache-jmeter-5.0/bin/stoptest.sh
