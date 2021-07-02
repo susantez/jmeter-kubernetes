@@ -22,10 +22,10 @@ test_name="$(basename "$jmx")"
 
 #Get Master pod details
 
-master_pod=`kubectl get po -n $tenant | grep jmeter-master | awk '{print $1}'`
+master_pod=`eks kubectl get po -n $tenant | grep jmeter-master | awk '{print $1}'`
 
-kubectl cp "$jmx" -n $tenant "$master_pod:/$test_name"
+eks kubectl cp "$jmx" -n $tenant "$master_pod:/$test_name"
 
 ## Echo Starting Jmeter load test
 
-kubectl exec -ti -n $tenant $master_pod -- /bin/bash /load_test "$test_name"
+eks kubectl exec -ti -n $tenant $master_pod -- /bin/bash /load_test "$test_name"
