@@ -8,7 +8,7 @@ echo "Current list of namespaces on the kubernetes cluster:"
 
 echo
 
-kubectl get namespaces | grep -v NAME | awk '{print $1}'
+eks kubectl get namespaces | grep -v NAME | awk '{print $1}'
 
 echo
 
@@ -33,7 +33,7 @@ fi
 
 echo "Creating Jmeter slave nodes"
 
-nodes=`kubectl get no | egrep -v "master|NAME" | wc -l`
+nodes=`eks kubectl get no | egrep -v "master|NAME" | wc -l`
 
 echo
 
@@ -45,16 +45,16 @@ echo
 
 echo
 
-kubectl create -n $tenant -f $working_dir/jmeter_slaves_deploy.yaml
+eks kubectl create -n $tenant -f $working_dir/jmeter_slaves_deploy.yaml
 
-kubectl create -n $tenant -f $working_dir/jmeter_slaves_svc.yaml
+eks kubectl create -n $tenant -f $working_dir/jmeter_slaves_svc.yaml
 
 echo "Creating Jmeter Master"
 
-kubectl create -n $tenant -f $working_dir/jmeter_master_configmap.yaml
+eks kubectl create -n $tenant -f $working_dir/jmeter_master_configmap.yaml
 
-kubectl create -n $tenant -f $working_dir/jmeter_master_deploy.yaml
+eks kubectl create -n $tenant -f $working_dir/jmeter_master_deploy.yaml
 
 echo
 
-kubectl get -n $tenant all
+eks kubectl get -n $tenant all
